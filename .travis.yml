@@ -10,8 +10,8 @@ android:
     - platform-tools
 
 before_install:
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - touch "$ANDROID_HOME/repositories.cfg"
+  - yes | sdkmanager --licenses
   - sdkmanager tools
   - sdkmanager "system-images;android-16;default;armeabi-v7a"
   - echo no | avdmanager create avd -f -n test -k "system-images;android-16;default;armeabi-v7a"

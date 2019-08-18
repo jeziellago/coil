@@ -1,26 +1,18 @@
-# Adapted from: https://github.com/square/leakcanary/blob/50142e8e40a5a7f50f7ab9d973e199aa9812bd66/.travis.yml
-
 language: android
 dist: trusty
 android:
   components:
     - android-28
     - build-tools-28.0.3
-    - tools
-    - platform-tools
 branches:
   only:
   - master
 
-install:
-  - ./gradlew clean ktlintCheck assembleDebugUnitTest assembleDebugAndroidTest
-
 before_script:
-  - touch ~/.android/repositories.cfg
+  # Run these first before starting the emulator.
+  # - ./gradlew ktlintCheck assembleDebugUnitTest assembleDebugAndroidTest
   # Accept Android licenses.
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - yes | sdkmanager --update
+  - touch ~/.android/repositories.cfg
   - yes | sdkmanager --licenses
   # Create the emulator.
   - sdkmanager tools
